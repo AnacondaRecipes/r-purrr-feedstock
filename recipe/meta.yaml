@@ -34,6 +34,8 @@ requirements:
     - r-base
     - {{ compiler('c') }}        # [not win]
     - {{native}}toolchain        # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}make
     - r-magrittr >=1.5
     - r-rlang >=0.1
     - r-tibble
