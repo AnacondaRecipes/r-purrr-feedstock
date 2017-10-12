@@ -1,4 +1,4 @@
-{% set version = '0.2.2' %}
+{% set version = '0.2.3' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,49 +12,85 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/purrr_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/purrr/purrr_{{ version }}.tar.gz
-  sha256: 83756d90075b12d93a5a71aa6e9fc7a5e06eb7a92f2b4e4ad067db310e465a53
+  sha256: aace6ae2f3429d0e453bfa73c02f6c5133aaff5a9cb0f860d29149ba97053e48
+
+
+  # patches:
+   # List any patch files here
+   # - fix.patch
 
 build:
+  # If this is a new build for the same version, increment the build number.
   number: 0
-  skip: true  # [win32]
+
+  # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
 
+# Suggests: covr, dplyr (>= 0.4.3), testthat, knitr, rmarkdown
 requirements:
   build:
     - r-base
-    - r-bh
-    - r-rcpp
-    - r-dplyr
-    - r-lazyeval >=0.2.0
+    - {{ compiler('c') }}        # [not win]
+    - {{native}}toolchain        # [win]
     - r-magrittr >=1.5
-    - posix                # [win]
-    - {{native}}toolchain  # [win]
-    - gcc                  # [not win]
+    - r-rlang >=0.1
+    - r-tibble
+
   run:
     - r-base
-    - r-bh
-    - r-rcpp
-    - r-dplyr
-    - r-lazyeval >=0.2.0
+    - {{native}}gcc-libs         # [win]
     - r-magrittr >=1.5
-    - libgcc  # [not win]
+    - r-rlang >=0.1
+    - r-tibble
 
 test:
   commands:
-    - $R -e "library('purrr')"  # [not win]
+    # You can put additional test commands to be run here.
+    - $R -e "library('purrr')"           # [not win]
     - "\"%R%\" -e \"library('purrr')\""  # [win]
 
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
+
 about:
-  home: https://github.com/hadley/purrr
-  license: GPL-3
-  summary: Make your pure functions purr with the 'purrr' package. This package completes R's
-    functional programming tools with missing features present in other programming
-    languages.
+  home: http://purrr.tidyverse.org, https://github.com/tidyverse/purrr
+  license: GPL-3 | file LICENSE
+  summary: A complete and consistent functional programming toolkit for R.
   license_family: GPL3
 
 extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - mingwandroid
+
+# The original CRAN metadata for this package was:
+
+# Package: purrr
+# Title: Functional Programming Tools
+# Version: 0.2.3
+# Authors@R: c( person("Lionel", "Henry", , "lionel@rstudio.com", c("aut", "cre")), person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"), person("RStudio", role = c("cph", "fnd")) )
+# Description: A complete and consistent functional programming toolkit for R.
+# URL: http://purrr.tidyverse.org, https://github.com/tidyverse/purrr
+# BugReports: https://github.com/tidyverse/purrr/issues
+# License: GPL-3 | file LICENSE
+# LazyData: true
+# Imports: magrittr (>= 1.5), tibble, rlang (>= 0.1)
+# Suggests: covr, dplyr (>= 0.4.3), testthat, knitr, rmarkdown
+# RoxygenNote: 6.0.1
+# VignetteBuilder: knitr
+# NeedsCompilation: yes
+# Packaged: 2017-08-02 09:31:27 UTC; lionel
+# Author: Lionel Henry [aut, cre], Hadley Wickham [aut], RStudio [cph, fnd]
+# Maintainer: Lionel Henry <lionel@rstudio.com>
+# Repository: CRAN
+# Date/Publication: 2017-08-02 18:31:42 UTC
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
