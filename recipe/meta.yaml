@@ -1,4 +1,4 @@
-{% set version = '0.2.3' %}
+{% set version = '0.2.4' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,7 +12,7 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/purrr_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/purrr/purrr_{{ version }}.tar.gz
-  sha256: aace6ae2f3429d0e453bfa73c02f6c5133aaff5a9cb0f860d29149ba97053e48
+  sha256: ed8d0f69d29b95c2289ae52be08a0e65f8171abb6d2587de7b57328bf3b2eb71
 
 
   # patches:
@@ -28,7 +28,7 @@ build:
     - lib/R/lib/
     - lib/
 
-# Suggests: covr, dplyr (>= 0.4.3), testthat, knitr, rmarkdown
+# Suggests: covr, dplyr (>= 0.4.3), knitr, rmarkdown, testthat
 requirements:
   build:
     - r-base
@@ -75,23 +75,24 @@ extra:
 
 # Package: purrr
 # Title: Functional Programming Tools
-# Version: 0.2.3
+# Version: 0.2.4
 # Authors@R: c( person("Lionel", "Henry", , "lionel@rstudio.com", c("aut", "cre")), person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"), person("RStudio", role = c("cph", "fnd")) )
 # Description: A complete and consistent functional programming toolkit for R.
+# License: GPL-3 | file LICENSE
 # URL: http://purrr.tidyverse.org, https://github.com/tidyverse/purrr
 # BugReports: https://github.com/tidyverse/purrr/issues
-# License: GPL-3 | file LICENSE
-# LazyData: true
-# Imports: magrittr (>= 1.5), tibble, rlang (>= 0.1)
-# Suggests: covr, dplyr (>= 0.4.3), testthat, knitr, rmarkdown
-# RoxygenNote: 6.0.1
+# Depends: R (>= 3.1)
+# Imports: magrittr (>= 1.5), rlang (>= 0.1), tibble
+# Suggests: covr, dplyr (>= 0.4.3), knitr, rmarkdown, testthat
 # VignetteBuilder: knitr
+# LazyData: true
+# RoxygenNote: 6.0.1
 # NeedsCompilation: yes
-# Packaged: 2017-08-02 09:31:27 UTC; lionel
+# Packaged: 2017-10-18 13:06:58 UTC; hadley
 # Author: Lionel Henry [aut, cre], Hadley Wickham [aut], RStudio [cph, fnd]
 # Maintainer: Lionel Henry <lionel@rstudio.com>
 # Repository: CRAN
-# Date/Publication: 2017-08-02 18:31:42 UTC
+# Date/Publication: 2017-10-18 20:19:51 UTC
 
 # See
 # http://docs.continuum.io/conda/build.html for
