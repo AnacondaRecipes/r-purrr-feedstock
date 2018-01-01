@@ -23,6 +23,7 @@ build:
   # If this is a new build for the same version, increment the build number.
   number: 0
 
+
   # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
@@ -31,11 +32,13 @@ build:
 # Suggests: covr, dplyr (>= 0.4.3), knitr, rmarkdown, testthat
 requirements:
   build:
-    - r-base
     - {{ compiler('c') }}        # [not win]
     - {{native}}toolchain        # [win]
     - {{posix}}filesystem        # [win]
     - {{posix}}make
+
+  host:
+    - r-base
     - r-magrittr >=1.5
     - r-rlang >=0.1
     - r-tibble
