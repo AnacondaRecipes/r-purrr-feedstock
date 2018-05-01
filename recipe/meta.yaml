@@ -14,16 +14,10 @@ source:
     - {{ cran_mirror }}/src/contrib/Archive/purrr/purrr_{{ version }}.tar.gz
   sha256: ed8d0f69d29b95c2289ae52be08a0e65f8171abb6d2587de7b57328bf3b2eb71
 
-
-  # patches:
-   # List any patch files here
-   # - fix.patch
-
 build:
   merge_build_host: True  # [win]
   # If this is a new build for the same version, increment the build number.
   number: 0
-
 
   # This is required to make R link correctly on Linux.
   rpaths:
